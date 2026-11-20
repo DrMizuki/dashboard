@@ -1,0 +1,40 @@
+/* ============================================================
+   全局主题 —— 改这里就能整体换配色
+   ============================================================ */
+:root {
+  --bg: #060d1f;
+  --panel: rgba(14, 31, 61, 0.72);
+  --border: rgba(64, 158, 255, 0.18);
+  --text: #d7e3f4;
+  --text-dim: #7b91b4;
+  --accent: #35d0ff;
+  --gold: #ffd15c;
+  --ok: #3ddc97;
+  --danger: #ff6b81;
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: 'PingFang SC', 'Microsoft YaHei', 'Segoe UI', system-ui, sans-serif;
+  color: var(--text);
+  background-color: var(--bg);
+  /* 两层光晕 + 一层网格，纯 CSS 就能做出大屏的科技感 */
+  background-image:
+    radial-gradient(900px 520px at 12% -10%, rgba(53, 208, 255, 0.14), transparent 60%),
+    radial-gradient(720px 420px at 92% -6%, rgba(155, 140, 255, 0.13), transparent 55%),
+    linear-gradient(rgba(64, 158, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(64, 158, 255, 0.045) 1px, transparent 1px);
+  background-size: auto, auto, 46px 46px, 46px 46px;
+  -webkit-font-smoothing: antialiased;
+}
