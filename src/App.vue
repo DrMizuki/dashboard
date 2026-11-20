@@ -13,16 +13,21 @@
     </ul>
 
     <main class="grid">
-      <ChartCard title="城市 AQI 排行" subtitle="TOP 10">
-        <BarChart />
+      <ChartCard class="card--bar" title="城市 AQI 排行" subtitle="TOP 10">
+        <TopList></TopList>
       </ChartCard>
-      <ChartCard title="24 小时 AQI 走势" subtitle="北京">
+      <!-- 新增：地图  -->
+      <ChartCard class="card--map" title="全国空气质量分布" subtitle="省级 AQI">
+        <MapChart></MapChart>
+      </ChartCard>
+
+      <ChartCard class="card--line" title="24 小时 AQI 走势" subtitle="北京">
         <LineChart />
       </ChartCard>
-      <ChartCard title="空气质量等级分布" subtitle="全国 339 城">
+      <ChartCard class="card--pie" title="空气质量等级分布" subtitle="全国 339 城">
         <PieChart />
       </ChartCard>
-      <ChartCard title="主要污染物对比" subtitle="北京 vs 上海">
+      <ChartCard class="card-radar" title="主要污染物对比" subtitle="北京 vs 上海">
         <RadarChart />
       </ChartCard>
     </main>
@@ -38,12 +43,15 @@ import BarChart from './components/BarChart.vue'
 import LineChart from './components/LineChart.vue'
 import PieChart from './components/PieChart.vue'
 import RadarChart from './components/RadarChart.vue'
+import MapChart from './components/MapChart.vue'
+import TopList from './components/TopList.vue'
 import { overview } from './data/mock'
 
 const now = new Date()
-const updatedAt = `${String(now.getHours()).padStart(2, '0')}:${String(
-  now.getMinutes(),
-).padStart(2, '0')}`
+const updatedAt = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(
+  2,
+  '0',
+)}`
 </script>
 
 <style scoped>
@@ -117,9 +125,31 @@ const updatedAt = `${String(now.getHours()).padStart(2, '0')}:${String(
   flex: 1;
   min-height: 0;
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: 1fr 1.35fr 1fr;
   grid-template-rows: repeat(2, minmax(0, 1fr));
   gap: 12px;
+}
+
+/* 地图：中间一列，跨两行 */
+.grid > .card--map {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+}
+.grid > .card--bar {
+  grid-column: 1;
+  grid-row: 1;
+}
+.grid > .card--line {
+  grid-column: 1;
+  grid-row: 2;
+}
+.grid > .card--pie {
+  grid-column: 3;
+  grid-row: 1;
+}
+.grid > .card--radar {
+  grid-column: 3;
+  grid-row: 2;
 }
 
 .screen__foot {
@@ -143,6 +173,10 @@ const updatedAt = `${String(now.getHours()).padStart(2, '0')}:${String(
     grid-template-columns: minmax(0, 1fr);
     grid-template-rows: none;
     grid-auto-rows: 300px;
+  }
+  .grid > [class^='card--'] {
+    grid-column: auto;
+    grid-row: auto;
   }
 }
 </style>
